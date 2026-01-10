@@ -1,6 +1,5 @@
 # Infrastructure Chapter
 # Contains foundational services that applications depend on
-
 name: infrastructure
 
 # Chapter-level appendix that extends the book appendix
