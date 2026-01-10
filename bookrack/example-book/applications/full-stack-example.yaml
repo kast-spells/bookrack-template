@@ -310,7 +310,7 @@ networkPolicy:
       ports:
         - protocol: TCP
           port: 53  # DNS
-          protocol: UDP
+        - protocol: UDP
           port: 53
 
 # Init containers
