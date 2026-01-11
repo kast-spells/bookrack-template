@@ -95,6 +95,10 @@ deploy_librarian() {
 
     info "Deploying librarian for book: ${book_name}..."
 
+    # Detect current branch
+    local target_branch=$(git symbolic-ref --short HEAD 2>/dev/null || echo "master")
+    info "Using branch: ${target_branch}"
+
     cat <<EOF | kubectl apply -f -
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -105,7 +109,7 @@ spec:
   project: default
   source:
     repoURL: ${repo_url}
-    targetRevision: main
+    targetRevision: ${target_branch}
     path: vendor/kast-system/librarian
     helm:
       values: |
@@ -134,6 +138,9 @@ main() {
 
     check_prerequisites
 
+    # Detect Git repository URL automatically
+    REPO_URL=$(git config --get remote.origin.url 2>/dev/null || echo "")
+
     # Interactive prompts
     read -p "Enter book name (e.g., my-book): " BOOK_NAME
     BOOK_NAME=${BOOK_NAME:-my-book}
@@ -144,7 +151,16 @@ main() {
     read -p "Enter environment (dev/staging/prod): " ENVIRONMENT
     ENVIRONMENT=${ENVIRONMENT:-dev}
 
-    read -p "Enter Git repository URL (for librarian): " REPO_URL
+    if [ -n "${REPO_URL}" ]; then
+        info "Detected repository URL: ${REPO_URL}"
+        read -p "Use this repository URL? (y/n) " -n 1 -r
+        echo
+        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+            read -p "Enter Git repository URL (for librarian): " REPO_URL
+        fi
+    else
+        read -p "Enter Git repository URL (for librarian): " REPO_URL
+    fi
 
     echo ""
     info "Configuration:"
