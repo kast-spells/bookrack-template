@@ -15,6 +15,7 @@ defaultTrinket:
   repository: https://github.com/kast-spells/kast-system.git
   path: ./charts/summon
   targetRevision: main
+  values:
 
 # Additional trinkets that can be referenced by spells
 # These provide additional functionality like secrets, service mesh, certificates
