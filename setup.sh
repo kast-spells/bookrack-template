@@ -40,10 +40,10 @@ check_prerequisites() {
 
 # Initialize submodules
 init_submodules() {
-    info "Initializing kast-system submodule..."
+    info "Initializing librarian submodule..."
 
-    if [ ! -d "vendor/kast-system/.git" ]; then
-        git submodule add https://github.com/kast-spells/kast-system.git vendor/kast-system 2>/dev/null || true
+    if [ ! -d "librarian/.git" ]; then
+        git submodule add https://github.com/kast-spells/librarian.git librarian 2>/dev/null || true
         git submodule update --init --recursive
         info "Submodule initialized ✓"
     else
@@ -110,7 +110,7 @@ spec:
   source:
     repoURL: ${repo_url}
     targetRevision: ${target_branch}
-    path: vendor/kast-system/librarian
+    path: librarian
     helm:
       values: |
         name: ${book_name}

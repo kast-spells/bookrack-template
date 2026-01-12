@@ -1,4 +1,4 @@
-[submodule "vendor/kast-system"]
-	path = vendor/kast-system
-	url = https://github.com/kast-spells/kast-system.git
+[submodule "librarian"]
+	path = librarian
+	url = https://github.com/kast-spells/librarian.git
 	branch = main

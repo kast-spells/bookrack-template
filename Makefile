@@ -13,9 +13,9 @@ help: ## Show this help message
 	@echo "Targets:"
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
-init: ## Initialize git submodules for kast-system
+init: ## Initialize git submodules for librarian
 	@echo "Initializing submodules..."
-	git submodule add https://github.com/kast-spells/kast-system.git vendor/kast-system 2>/dev/null || true
+	git submodule add https://github.com/kast-spells/librarian.git librarian 2>/dev/null || true
 	git submodule update --init --recursive
 	@echo "✓ Submodules initialized"
 
@@ -36,7 +36,7 @@ deploy-librarian: ## Deploy librarian for specified book
 	  source: \
 	    repoURL: $(REPO_URL) \
 	    targetRevision: main \
-	    path: vendor/kast-system/librarian \
+	    path: librarian \
 	    helm: \
 	      values: | \
 	        name: $(BOOK) \

@@ -24,8 +24,8 @@ git --version
 git clone https://github.com/kast-spells/bookrack-template.git my-bookrack
 cd my-bookrack
 
-# Initialize kast-system submodule
-git submodule add https://github.com/kast-spells/kast-system.git vendor/kast-system
+# Initialize librarian submodule
+git submodule add https://github.com/kast-spells/librarian.git librarian
 git submodule update --init --recursive
 ```
 
@@ -58,7 +58,7 @@ spec:
   source:
     repoURL: https://github.com/YOUR-ORG/my-bookrack.git  # Your forked repo
     targetRevision: main
-    path: vendor/kast-system/librarian
+    path: librarian
     helm:
       values: |
         name: my-book

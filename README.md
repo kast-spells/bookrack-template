@@ -73,8 +73,7 @@ argocd app list -l argocd.argoproj.io/instance=<your-book-name>
 │           ├── nginx-example.yaml
 │           ├── app-with-secrets.yaml
 │           └── app-with-istio.yaml
-├── vendor/                     # Git submodules
-│   └── kast-system/           # kast-system framework (charts, librarian)
+├── librarian/                  # Librarian helm chart (git submodule)
 ├── docs/                       # Documentation
 ├── setup.sh                    # Automated setup script
 └── README.md                   # This file
@@ -249,7 +248,7 @@ spec:
   source:
     repoURL: https://github.com/YOUR-ORG/my-bookrack.git  # Your forked repo
     targetRevision: main
-    path: vendor/kast-system/librarian
+    path: librarian
     helm:
       values: |
         name: my-book
